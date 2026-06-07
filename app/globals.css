@@ -1,0 +1,145 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+:root {
+  --background: oklch(0.08 0.01 260);
+  --foreground: oklch(0.95 0.02 220);
+  --card: oklch(0.12 0.015 260);
+  --card-foreground: oklch(0.92 0.02 220);
+  --primary: oklch(0.65 0.2 200);
+  --primary-foreground: oklch(0.08 0.01 260);
+  --muted: oklch(0.18 0.015 260);
+  --muted-foreground: oklch(0.6 0.04 220);
+  --accent: oklch(0.55 0.22 280);
+  --accent-foreground: oklch(0.95 0.02 220);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 10%);
+  --ring: oklch(0.65 0.2 200);
+  --radius: 0.75rem;
+
+  /* NeuroAtlas custom palette */
+  --neo-cyan: oklch(0.72 0.18 200);
+  --neo-violet: oklch(0.62 0.22 280);
+  --neo-emerald: oklch(0.68 0.18 155);
+  --neo-amber: oklch(0.75 0.18 65);
+  --neo-rose: oklch(0.65 0.22 15);
+  --neo-blue: oklch(0.6 0.2 240);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground overflow-hidden;
+    background: radial-gradient(ellipse at 20% 50%, oklch(0.12 0.04 260) 0%, oklch(0.06 0.01 260) 60%),
+                radial-gradient(ellipse at 80% 20%, oklch(0.1 0.035 280) 0%, transparent 50%),
+                oklch(0.07 0.01 260);
+  }
+}
+
+/* Glassmorphism utilities */
+.glass {
+  background: oklch(1 0 0 / 4%);
+  backdrop-filter: blur(20px) saturate(1.4);
+  border: 1px solid oklch(1 0 0 / 8%);
+}
+
+.glass-strong {
+  background: oklch(1 0 0 / 7%);
+  backdrop-filter: blur(32px) saturate(1.6);
+  border: 1px solid oklch(1 0 0 / 12%);
+}
+
+/* Glow effects */
+.glow-cyan {
+  box-shadow: 0 0 20px oklch(0.72 0.18 200 / 30%), 0 0 60px oklch(0.72 0.18 200 / 10%);
+}
+
+.glow-violet {
+  box-shadow: 0 0 20px oklch(0.62 0.22 280 / 30%), 0 0 60px oklch(0.62 0.22 280 / 10%);
+}
+
+.glow-emerald {
+  box-shadow: 0 0 20px oklch(0.68 0.18 155 / 30%), 0 0 60px oklch(0.68 0.18 155 / 10%);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: oklch(1 0 0 / 15%); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: oklch(1 0 0 / 25%); }
+
+/* Animated gradient border */
+@keyframes border-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.border-animated {
+  animation: border-glow 3s ease-in-out infinite;
+}
+
+/* Neural pulse */
+@keyframes neural-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+.neural-pulse {
+  animation: neural-pulse 2.5s ease-in-out infinite;
+}
+
+/* Scan line */
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.scan-line {
+  animation: scan 8s linear infinite;
+}
+
+/* Text shimmer */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.text-shimmer {
+  background: linear-gradient(90deg, oklch(0.72 0.18 200), oklch(0.85 0.12 220), oklch(0.72 0.18 200));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
